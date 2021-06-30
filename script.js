@@ -1,5 +1,32 @@
 window.addEventListener("load", function() {
-   function randomNumber(min, max) { 
+   function allnumeric(inputtxt)
+   {
+      var numbers = /^[0-9]+$/;
+      if(inputtxt.value.match(numbers))
+      {
+      return true;
+      }
+      else
+      {
+      return false;
+      }
+   }
+
+   function alltext(inputtxt)
+   {
+      var letters = /^[a-zA-Z]+$/;
+      if(inputtxt.value.match(letters))
+      {
+      return true;
+      }
+      else
+      {
+      return false;
+      }
+   }
+
+
+   function randomNumber(min, max) {
       return Math.random() * (max - min) + min;
    };
    fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
@@ -24,9 +51,18 @@ window.addEventListener("load", function() {
       let copilotNameInput = document.querySelector("input[name=copilotName]");
       let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
       let cargoMassInput = document.querySelector("input[name=cargoMass]");
-      if (pilotNameInput.value === "" || copilotNameInput.value === ""|| isNaN(fuelLevelInput.value)  || isNaN(cargoMassInput.value)) {
+      if (pilotNameInput.value === "" || copilotNameInput.value === ""|| fuelLevelInput.value === ""  || cargoMassInput.value === "" ) {
          alert("All fields are required!");
       }
+
+      if(allnumeric(fuelLevelInput) != true || allnumeric(cargoMassInput) != true){
+         alert("Fuel Level / Cargo Mass must contain numbers only")
+      }
+
+      if(alltext(pilotNameInput) != true || alltext(copilotNameInput) != true){
+         alert("Pilot / Co-Pilot name must contain only letters")
+      }
+
       let pStatus = false;
       let cpStatus = false;
       let fStatus = false;
