@@ -36,7 +36,7 @@ window.addEventListener("load", function() {
                   <h2>Mission Destination</h2>
                   <ol>
                      <li>Name: ${json[i].name}</li>
-                     <li>Diameter: ${json[i].dimaeter}</li>
+                     <li>Diameter: ${json[i].diameter}</li>
                      <li>Star: ${json[i].star}</li>
                      <li>Distance from Earth: ${json[i].distance}</li>
                      <li>Number of Moons: ${json[i].moons}</li>
@@ -55,13 +55,21 @@ window.addEventListener("load", function() {
          alert("All fields are required!");
       }
 
+      if(parseInt(cargoMassInput.value) >= 10000){
+         alert("Cargo Mass weight must be under 10,000 KG")
+      };
+
+      if(parseInt(fuelLevelInput.value) <= 10000 ){
+         alert("Fuel Level  must be above 10,000")
+      };
+
       if(allnumeric(fuelLevelInput) != true || allnumeric(cargoMassInput) != true){
          alert("Fuel Level / Cargo Mass must contain numbers only")
-      }
+      };
 
       if(alltext(pilotNameInput) != true || alltext(copilotNameInput) != true){
          alert("Pilot / Co-Pilot name must contain only letters")
-      }
+      };
 
       let pStatus = false;
       let cpStatus = false;
@@ -72,7 +80,7 @@ window.addEventListener("load", function() {
          document.getElementById("pilotStatus").innerHTML = "Pilot Not Ready";
          pStatus = false;
       }else{
-         document.getElementById("pilotStatus").innerHTML = "Pilot Ready " + pilotNameInput.value;
+         document.getElementById("pilotStatus").innerHTML = "Pilot Ready - " + pilotNameInput.value;
          pStatus = true;
       }
 
@@ -80,25 +88,25 @@ window.addEventListener("load", function() {
          document.getElementById("copilotStatus").innerHTML = "Co-Pilot Not Ready";
          cpStatus = false;
       }else{
-         document.getElementById("copilotStatus").innerHTML = "Co-Pilot Ready " + copilotNameInput.value;
+         document.getElementById("copilotStatus").innerHTML = "Co-Pilot Ready - " + copilotNameInput.value;
          cpStatus = true;
       }
 
-      if (fuelLevelInput.value >= 10000){
-         document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch " + fuelLevelInput.value;
+      if (parseInt(fuelLevelInput.value) >= 10000){
+         document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch - " + fuelLevelInput.value;
          fStatus = true;
       }else{
-         document.getElementById("fuelStatus").innerHTML = "Shuttle not ready for launch";
+         document.getElementById("fuelStatus").innerHTML = "Fuel level too low for launch - " + fuelLevelInput.value;;
          document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch";
          document.getElementById("launchStatus").style = "color: red";
          fStatus = false;
       }
 
-      if (cargoMassInput.value <= 10000){
-         document.getElementById("cargoStatus").innerHTML = "Cargo mass low enough for launch " + cargoMassInput.value;
+      if (parseInt(cargoMassInput.value) <= 10000){
+         document.getElementById("cargoStatus").innerHTML = "Cargo mass low enough for launch - " + cargoMassInput.value;
          cStatus = true;
       }else{
-         document.getElementById("cargoStatus").innerHTML = "Shuttle not ready for launch";
+         document.getElementById("cargoStatus").innerHTML = "Cargo mass too high for launch - " + cargoMassInput.value;;
          document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch";
          document.getElementById("launchStatus").style = "color: red";
          cStatus = false;
